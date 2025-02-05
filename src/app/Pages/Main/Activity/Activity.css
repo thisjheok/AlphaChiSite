@@ -1,0 +1,11 @@
+.Activity{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+}
+
+.Activity-title{
+    font-size: 18px;
+    font-weight: bold;
+}

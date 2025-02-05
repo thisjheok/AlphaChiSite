@@ -1,0 +1,19 @@
+.Notice{
+    display: flex;
+    flex-direction: column;
+    gap: 0px 10px;
+    padding: 24px 16px;
+}
+
+.Notice-title{
+    font-size: 18px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.Notice-preview{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}

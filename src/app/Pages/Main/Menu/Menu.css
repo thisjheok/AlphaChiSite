@@ -1,0 +1,29 @@
+.Menu{
+    display: flex;
+    flex-direction: column;
+    gap: 0px 16px;
+    padding: 24px 16px;
+    background-color: #F9FAFB;
+}
+
+.Menu-header{
+    display: flex;
+    flex-direction: row;
+    gap: 0px 16px;
+}
+
+.Menu-title{
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.Menu-Contents{
+    display: flex;
+    flex-direction: row;
+    gap: 0px 16px;
+    margin-top: 16px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
