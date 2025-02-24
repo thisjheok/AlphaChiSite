@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import './CabinetLists.css';
 import './BookCabinet.css';
 import { createClient } from '@supabase/supabase-js';
-// 백엔드 응답을 시뮬레이션하는 타입과 더미 데이터
 interface ReservationData {
     identifier: string;
     is_reserved: boolean;
@@ -18,10 +17,12 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 interface CabinetListsProps {
     startDate: string;
     endDate: string;
+    user_id: number;
 }
 
-export default function CabinetLists({ startDate, endDate }: CabinetListsProps) {
+export default function CabinetLists({ startDate, endDate, user_id }: CabinetListsProps) {
     const router = useRouter();
+
     const [selectedCabinet, setSelectedCabinet] = useState<string | null>(null);
     const cabinets = [
         ['a1', 'a2', 'a3', 'a4', 'a5'],
@@ -128,7 +129,7 @@ export default function CabinetLists({ startDate, endDate }: CabinetListsProps) 
             <button 
                 className="BookCabinetButton" 
                 onClick={() => {
-                    handleMakeReservation(1);
+                    handleMakeReservation(user_id);
                 }}
             >
                 예약하기
