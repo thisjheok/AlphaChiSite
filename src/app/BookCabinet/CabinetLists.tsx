@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import './CabinetLists.css';
 import './BookCabinet.css';
 // 백엔드 응답을 시뮬레이션하는 타입과 더미 데이터
@@ -28,6 +29,7 @@ interface CabinetListsProps {
 }
 
 export default function CabinetLists({ startDate, endDate }: CabinetListsProps) {
+    const router = useRouter();
     const [selectedCabinet, setSelectedCabinet] = useState<string | null>(null);
     const cabinets = [
         ['a1', 'a2', 'a3', 'a4', 'a5'],
@@ -90,7 +92,15 @@ export default function CabinetLists({ startDate, endDate }: CabinetListsProps) 
             ))}
         </div>
         <div className="BookCabinetButtonContainer">
-            <button className="BookCabinetButton" onClick={() => {console.log(selectedCabinet, startDate, endDate)}}>예약하기</button>
+            <button 
+                className="BookCabinetButton" 
+                onClick={() => {
+                    console.log(selectedCabinet, startDate, endDate);
+                    router.push('/BookCabinet/Complete');
+                }}
+            >
+                예약하기
+            </button>
         </div>
         </>
     );
