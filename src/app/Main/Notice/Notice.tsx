@@ -1,4 +1,4 @@
-import NoticeCard from "../../../Components/NoticeCard/NoticeCard";
+import NoticeCard from "../../Components/NoticeCard/NoticeCard";
 import './Notice.css'
 const Notice = () => {
     return (

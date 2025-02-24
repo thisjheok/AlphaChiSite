@@ -1,0 +1,44 @@
+.cabinet-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(40px, 1fr));
+    gap: 0.5rem;
+    padding: 0.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.cabinet-element {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    aspect-ratio: 1;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cabinet-element.reserved {
+    background-color: #c5c5c5;
+    color: white;
+}
+
+.cabinet-element.selected {
+    background-color: rgb(43, 109, 242);
+    border: none;
+    color: white;
+}
+
+@media screen and (max-width: 375px) {
+    .cabinet-list {
+        gap: 0.3rem;
+        padding: 0.3rem;
+    }
+    
+    .cabinet-element {
+        padding: 0.3rem;
+        font-size: 12px;
+    }
+}

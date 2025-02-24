@@ -1,5 +1,5 @@
 import './Activity.css'
-import ActivityCard from '../../../Components/ActivityCard/ActivityCard'
+import ActivityCard from '../../Components/ActivityCard/ActivityCard'
 const Activity = () => {
     return (
         <div className="Activity">
