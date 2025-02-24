@@ -1,0 +1,123 @@
+
+.MypageContainer {
+    padding: 20px;
+}
+.MypageHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.MypageBackButton {
+    width: 24px;
+    height: 24px;
+    display: flex;
+}
+
+.MypageTitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 20px;
+    display: flex;
+}
+
+.MyPageBox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.MypageInfo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.MypageInfoProfileBox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.MypageInfoProfileImg {
+    width: 64px;
+    height: 64px;
+}
+
+.MypageInfoProfile {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.MypageInfoProfileName {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.MypageInfoProfileDepartment {
+    font-size: 16px;
+    font-weight: 400;
+    color: #4B5563;
+}
+
+.MypageInfoBox2 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.MypageInfoBox2Item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 15px;
+}
+
+.MypageInfoBox2ItemTitle {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.MypageInfoBox2ItemText {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.MypageProfileEditBtn {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #F3F4F6;
+    color: #4B5563;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.MypageProfileEditBtnImg {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}

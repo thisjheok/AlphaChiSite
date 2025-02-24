@@ -17,3 +17,14 @@
     gap: 16px;
     margin-top: 16px;
 }
+
+.Notice-more{
+    font-size: 12px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.NoticeHeader{
+    display: flex;
+    justify-content: space-between;
+}
