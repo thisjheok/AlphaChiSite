@@ -5,11 +5,12 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 import CabinetLists from './CabinetLists';
-
+import { useRouter } from 'next/navigation';
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function BookCabinet() {
+    const router = useRouter();
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [currentPage, setCurrentPage] = useState(1);
@@ -31,7 +32,7 @@ export default function BookCabinet() {
 
     const handleBackPage = () => {
         if (currentPage === 1){
-            return;
+            router.push('/');
         };
         setCurrentPage(currentPage - 1);
     }

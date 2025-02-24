@@ -2,26 +2,18 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import './CabinetLists.css';
 import './BookCabinet.css';
+import { createClient } from '@supabase/supabase-js';
 // 백엔드 응답을 시뮬레이션하는 타입과 더미 데이터
 interface ReservationData {
-    cabinetId: string;
-    isReserved: boolean;
+    identifier: string;
+    is_reserved: boolean;
     userId?: string;
 }
 
-// 백엔드 API 호출을 시뮬레이션하는 함수
-const fetchReservations = async (): Promise<ReservationData[]> => {
-    // 실제로는 여기서 API 호출을 하게 됩니다
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve([
-                { cabinetId: 'a1', isReserved: true, userId: 'user1' },
-                { cabinetId: 'b3', isReserved: true, userId: 'user2' },
-                { cabinetId: 'c5', isReserved: true, userId: 'user3' },
-            ]);
-        }, 0); // 1초 딜레이로 실제 API 호출처럼 보이게 함
-    });
-};
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 
 interface CabinetListsProps {
     startDate: string;
@@ -49,13 +41,27 @@ export default function CabinetLists({ startDate, endDate }: CabinetListsProps) 
         return initialState;
     });
 
+    const fetchReservations = async () => {
+        let { data, error } = await supabase
+            .rpc('check_lockers_reservation', {
+                start_date_input: startDate,
+                end_date_input: endDate
+            })
+        if (error) console.error(error)
+        else {
+            console.log(data)
+            return data;
+        }
+    }
+    
+
     useEffect(() => {
         const loadReservations = async () => {
             try {
                 const data = await fetchReservations();
                 const newReservations = { ...reservations };
-                data.forEach(reservation => {
-                    newReservations[reservation.cabinetId] = reservation.isReserved;
+                data.forEach((reservation: ReservationData) => {
+                    newReservations[reservation.identifier] = reservation.is_reserved;
                 });
                 setReservations(newReservations);
             } catch (error) {
@@ -78,6 +84,33 @@ export default function CabinetLists({ startDate, endDate }: CabinetListsProps) 
             </div>
         )
     }
+
+    const convertCabinetIdToNumber = (cabinetId: string): number => {
+        const row = cabinetId.charAt(0).toLowerCase();
+        const col = parseInt(cabinetId.charAt(1));
+        const rowNumber = row.charCodeAt(0) - 'a'.charCodeAt(0);
+        return rowNumber * 5 + col;
+    }
+
+    const handleMakeReservation = async (userId: number) => {
+        if (!selectedCabinet) return;
+        
+        const numericLockerId = convertCabinetIdToNumber(selectedCabinet);
+        const { data, error } = await supabase
+            .rpc('make_reservation', {
+                locker_id_input: numericLockerId,
+                start_date_input: startDate,
+                end_date_input: endDate,
+                user_id_input: userId
+            })
+        if (error){
+            console.error(error)
+        }
+        else {
+            console.log(data)
+            router.push('/BookCabinet/Complete');
+        }
+    }
     
     if (isLoading) {
         return <div>로딩 중...</div>;
@@ -95,8 +128,7 @@ export default function CabinetLists({ startDate, endDate }: CabinetListsProps) 
             <button 
                 className="BookCabinetButton" 
                 onClick={() => {
-                    console.log(selectedCabinet, startDate, endDate);
-                    router.push('/BookCabinet/Complete');
+                    handleMakeReservation(1);
                 }}
             >
                 예약하기
