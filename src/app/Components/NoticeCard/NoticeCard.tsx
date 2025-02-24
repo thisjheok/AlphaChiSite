@@ -1,14 +1,22 @@
 import './NoticeCard.css'
 
-const NoticeCard = () => {
+interface NoticeCardProps {
+    title: string;
+    date: string;
+    content: string;
+    id: number;
+    writer_id: number;
+}
+
+const NoticeCard = ({ title, date, content, id, writer_id }: NoticeCardProps) => {
     return (
         <div className="NoticeCard">
             <div className="NoticeCard-header">
-                <h1 className="NoticeCard-title">제목</h1>
-                <p className="NoticeCard-date">2025.02.05</p>
+                <h1 className="NoticeCard-title">{title}</h1>
+                <p className="NoticeCard-date">{date}</p>
             </div>
             <div className="NoticeCard-content-box">
-                <p className="NoticeCard-content">내용</p>
+                <p className="NoticeCard-content">{content}</p>
             </div>
         </div>
     )

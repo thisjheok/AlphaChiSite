@@ -12,8 +12,8 @@ import { Bounce } from 'react-toastify';
 
 const Main = () => {
     const router = useRouter();
-    const user_id = localStorage.getItem('user_id');
     useEffect(() => {
+        const user_id = localStorage.getItem('user_id');
         if (user_id === null) {
             toast.error('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.', {
                 position: "bottom-center",
