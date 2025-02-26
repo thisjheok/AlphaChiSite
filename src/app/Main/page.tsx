@@ -31,7 +31,7 @@ const Main = () => {
                 <Hello />
                 <Notice />
                 <Menu />
-                <Activity />
+                {/* <Activity /> */}
             </div>
             <ToastContainer />
         </>
