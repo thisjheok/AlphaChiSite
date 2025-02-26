@@ -71,6 +71,22 @@ export default function BookCabinet() {
     }
 
     const SetEndDatePage = () => {
+        const handleNextClick = () => {
+            // 시작일과 종료일 사이의 일수 계산
+            const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays > 7) {
+                toast.error('예약 기간은 최대 7일까지 가능합니다.', {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                    transition: Bounce
+                });
+            } else {
+                setCurrentPage(3);
+            }
+        };
+
         return (
             <>
             <h2 className="BookCabinetTitle">종료일을 입력해주세요</h2>
@@ -81,7 +97,7 @@ export default function BookCabinet() {
                 formatDay={(locale, date) => date.getDate().toString()}
             />
             <div className="BookCabinetButtonContainer">
-                    <button className="BookCabinetButton" onClick={() => setCurrentPage(3)}>다음으로</button>
+                    <button className="BookCabinetButton" onClick={handleNextClick}>다음으로</button>
             </div>
             </>
         )
