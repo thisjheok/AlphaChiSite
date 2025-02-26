@@ -32,3 +32,52 @@
     flex-direction: column;
     gap: 20px;
 }
+
+.PostTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.PostUserInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.PostUserInfoText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.PostUserIcon {
+    width: 40px;
+    height: 40px;
+}
+
+.PostUserName {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.PostDate {
+    font-size: 12px;
+    font-weight: 400;
+    color: #808080;
+}
+
+.PostContent {
+    margin-top: 20px;
+}
+
+.PostContentText {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+
+

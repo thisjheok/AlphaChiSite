@@ -6,11 +6,12 @@ interface NoticeCardProps {
     content: string;
     id: number;
     writer_id: number;
+    onClick?: () => void;
 }
 
-const NoticeCard = ({ title, date, content, id, writer_id }: NoticeCardProps) => {
+const NoticeCard = ({ title, date, content, id, writer_id, onClick }: NoticeCardProps) => {
     return (
-        <div className="NoticeCard">
+        <div className="NoticeCard" onClick={onClick}>
             <div className="NoticeCard-header">
                 <h1 className="NoticeCard-title">{title}</h1>
                 <p className="NoticeCard-date">{date}</p>

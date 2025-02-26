@@ -12,8 +12,8 @@ const Menu = () => {
             </div>
             <div className="Menu-Contents">
                 <MenuContent title="사물함" imgSrc="/img/icons/Cabinet.svg" onClick={() => router.push('/BookCabinet')} />
-                <MenuContent title="게임존" imgSrc="/img/icons/Game.svg" onClick={() => router.push('/GameZone')} />
-                <MenuContent title="커뮤니티" imgSrc="/img/icons/Community.svg" onClick={() => router.push('/Community')} />
+                <MenuContent title="게임존" imgSrc="/img/icons/Game.svg" onClick={() => {}} />
+                <MenuContent title="커뮤니티" imgSrc="/img/icons/Community.svg" onClick={() => {}} />
             </div>
         </div>
     )
