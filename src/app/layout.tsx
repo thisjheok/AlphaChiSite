@@ -16,6 +16,11 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "AlphaChisite",
   description: "함께 배우며 추억을 만드는 알파카이입니다",
+  openGraph: {
+    title: "AlphaChisite",
+    description: "함께 배우며 추억을 만드는 알파카이입니다",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
