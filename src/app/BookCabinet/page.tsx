@@ -13,11 +13,16 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function BookCabinet() {
     const router = useRouter();
-    const user_id = localStorage.getItem('user_id');
-    const user_id_number = parseInt(user_id || '0');
+    const [userId, setUserId] = useState<string | null>(null);
+    const [userIdNumber, setUserIdNumber] = useState<number>(0);
 
     useEffect(() => {
-        if (user_id === null) {
+        // localStorage 접근을 클라이언트 사이드에서만 수행
+        const storedUserId = localStorage.getItem('user_id');
+        setUserId(storedUserId);
+        setUserIdNumber(parseInt(storedUserId || '0'));
+        
+        if (storedUserId === null) {
             toast.error('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.', {
                 position: "bottom-center",
                 autoClose: 1500,
@@ -71,6 +76,22 @@ export default function BookCabinet() {
     }
 
     const SetEndDatePage = () => {
+        const handleNextClick = () => {
+            // 시작일과 종료일 사이의 일수 계산
+            const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays > 7) {
+                toast.error('예약 기간은 최대 7일까지 가능합니다.', {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                    transition: Bounce
+                });
+            } else {
+                setCurrentPage(3);
+            }
+        };
+
         return (
             <>
             <h2 className="BookCabinetTitle">종료일을 입력해주세요</h2>
@@ -81,7 +102,7 @@ export default function BookCabinet() {
                 formatDay={(locale, date) => date.getDate().toString()}
             />
             <div className="BookCabinetButtonContainer">
-                    <button className="BookCabinetButton" onClick={() => setCurrentPage(3)}>다음으로</button>
+                    <button className="BookCabinetButton" onClick={handleNextClick}>다음으로</button>
             </div>
             </>
         )
@@ -100,7 +121,7 @@ export default function BookCabinet() {
                         : <CabinetLists 
                             startDate={startDate.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '-').replace('.', '')} 
                             endDate={endDate.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '-').replace('.', '')}
-                            user_id={user_id_number}
+                            user_id={userIdNumber}
                           />
             }
             <ToastContainer />

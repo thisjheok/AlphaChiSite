@@ -42,10 +42,21 @@ export default function Notice() {
             {notice.length > 0 && (
                 <div className='NoticeDetailContents'>
                     {notice.map((item) => (
-                        <NoticeCard key={item.id} title={item.title} date={item.date} content={item.content} id={item.id} writer_id={item.writer_id} />
+                        <NoticeCard 
+                            key={item.id} 
+                            title={item.title} 
+                            date={item.date} 
+                            content={item.content} 
+                            id={item.id} 
+                            writer_id={item.writer_id} 
+                            onClick={() => router.push(`/NoticeDetail/${item.id}`)}    
+                        />
                     ))}
                 </div>
             )}
         </div>
     );
 }
+//TODO:
+//공지 세부사항 Dynamic Route 추가 필요
+// 게시글 세부 페이지 만들기 
