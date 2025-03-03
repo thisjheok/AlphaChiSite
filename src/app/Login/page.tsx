@@ -19,9 +19,18 @@ export default function Login() {
         if (error) {
             console.error('로그인 오류:', error);
         } else {
-            localStorage.setItem('user_id', data[0].user_id);
-            console.log('로그인 성공:', data);
-            router.push('/');
+            const loginReturn = data[0];
+            if(loginReturn.login_success == false){
+                if(loginReturn.message == "학번이 존재하지 않습니다."){
+                    alert("학번이 존재하지 않습니다.");
+                }else if(loginReturn.message == "비밀번호가 맞지 않습니다."){
+                    alert("비밀번호가 틀렸습니다.");
+                }
+            }else{
+                localStorage.setItem('user_id', loginReturn.user_id);
+                console.log('로그인 성공:', data);
+                router.push('/');
+            }
         }
     };
     return (
