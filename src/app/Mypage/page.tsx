@@ -115,7 +115,7 @@ export default function Mypage() {
                             <>
                                 <p className='MypageInfoBox3ItemText'><strong>{reservation.locker_identifier}</strong></p>
                                 <div className='MypageInfoBox3Date'>
-                                    <img src='/img/icons/calendar.svg' alt='기간' />
+                                    <img src='/img/icons/Calendar.svg' alt='기간' />
                                     <p className='MypageInfoBox3ItemText'>
                                         {reservation.start_date && formatDate(reservation.start_date)} ~ 
                                         {reservation.end_date && formatDate(reservation.end_date)}
