@@ -41,8 +41,8 @@ const Notice = () => {
             <div className="Notice-preview">
                 {notice.length > 0 && (
                     <>
-                        <NoticeCard title={notice[0].title} date={notice[0].date} content={notice[0].content} id={notice[0].id} writer_id={notice[0].writer_id} />
-                        {notice.length > 1 && <NoticeCard title={notice[1].title} date={notice[1].date} content={notice[1].content} id={notice[1].id} writer_id={notice[1].writer_id} />}
+                        <NoticeCard title={notice[0].title} date={notice[0].date} content={notice[0].content} id={notice[0].id} writer_id={notice[0].writer_id} onClick={() => router.push(`/NoticeDetail/${notice[0].id}`)}/>
+                        {notice.length > 1 && <NoticeCard title={notice[1].title} date={notice[1].date} content={notice[1].content} id={notice[1].id} writer_id={notice[1].writer_id} onClick={() => router.push(`/NoticeDetail/${notice[1].id}`)}/>}
                     </>
                 )}
             </div>
