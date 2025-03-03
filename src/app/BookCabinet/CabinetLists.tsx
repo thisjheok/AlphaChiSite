@@ -106,10 +106,16 @@ export default function CabinetLists({ startDate, endDate, user_id }: CabinetLis
             })
         if (error){
             console.error(error)
+            alert('예약에 실패했습니다. 다시 시도해주세요.');
         }
         else {
-            console.log(data)
-            router.push('/BookCabinet/Complete');
+            if(data.reservation_id==null){
+                alert('이미 예약한 사물함을 지니고 있습니다.');
+                router.push('/');
+            }
+            else{
+                router.push('/BookCabinet/Complete');
+            }
         }
     }
     

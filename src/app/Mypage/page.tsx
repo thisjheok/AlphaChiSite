@@ -12,6 +12,21 @@ interface UserInfo {
     rank: string;
 }
 
+interface ReservationInfo {
+    locker_identifier: string;
+    start_date: string;
+    end_date: string;
+}
+
+// 날짜 형식 변환 함수 추가
+const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+};
+
 export default function Mypage() {
     const router = useRouter();
     const supabase = createClient(
@@ -19,7 +34,7 @@ export default function Mypage() {
         process.env.NEXT_PUBLIC_SUPABASE_KEY!
     );
     const [user, setUser] = useState<UserInfo | null>(null);
-
+    const [reservation, setReservation] = useState<ReservationInfo | null>(null);
     useEffect(() => {
         const user_id = localStorage.getItem('user_id');
         if (!user_id) {
@@ -50,6 +65,21 @@ export default function Mypage() {
         };
         fetchUser();
     }, []);
+
+    useEffect(() => {
+        const fetchReservation = async () => {
+            const user_id = localStorage.getItem('user_id');
+            const { data, error } = await supabase.rpc('get_user_reservations', {
+                user_id_input: user_id
+            });
+            if (error) {
+                console.error('예약 정보 가져오기 오류:', error);
+            } else {
+                setReservation(data[0]);
+            }
+        };
+        fetchReservation();
+    }, []);
     return (
         <div className='MypageContainer'>
             <div className='MypageHeader'>
@@ -78,6 +108,23 @@ export default function Mypage() {
                             <p className='MypageInfoBox2ItemTitle'>회원 상태</p>
                             <p className='MypageInfoBox2ItemText'>재학생</p>
                         </div>
+                    </div>
+                    <div className='MypageInfoBox3'>
+                        <p className='MypageInfoBox3ItemTitle'>예약 중인 사물함</p>
+                        {reservation ? (
+                            <>
+                                <p className='MypageInfoBox3ItemText'><strong>{reservation.locker_identifier}</strong></p>
+                                <div className='MypageInfoBox3Date'>
+                                    <img src='/img/icons/calendar.svg' alt='기간' />
+                                    <p className='MypageInfoBox3ItemText'>
+                                        {reservation.start_date && formatDate(reservation.start_date)} ~ 
+                                        {reservation.end_date && formatDate(reservation.end_date)}
+                                    </p>
+                                </div>
+                            </>
+                        ) : (
+                            <p className='MypageInfoBox3Empty'>현재 예약 중인 사물함이 없습니다.</p>
+                        )}
                     </div>
                 </div>
             </div>
