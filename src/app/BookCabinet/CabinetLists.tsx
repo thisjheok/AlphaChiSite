@@ -109,7 +109,8 @@ export default function CabinetLists({ startDate, endDate, user_id }: CabinetLis
             alert('예약에 실패했습니다. 다시 시도해주세요.');
         }
         else {
-            if(data.reservation_id==null){
+            console.log(data)
+            if(data[0].reservation_id === null || data[0].reservation_id === undefined){
                 alert('이미 예약한 사물함을 지니고 있습니다.');
                 router.push('/');
             }
