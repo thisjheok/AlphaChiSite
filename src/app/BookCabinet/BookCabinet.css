@@ -140,6 +140,7 @@
     margin: 0 auto;
     min-height: 100vh; /* 전체 뷰포트 높이 사용 */
     position: relative; /* 자식 요소의 절대 위치 기준점 */
+    overflow-x: hidden;
 }
 
 .BookCabinetTitle {
@@ -156,7 +157,7 @@
     width: 100%;
     padding: 20px;
     position: fixed; /* 화면 하단에 고정 */
-    bottom: 0; /* 하단에 배치 */
+    bottom: 0; /* 화면 하단에 배치 */
     left: 50%; /* 가운데 정렬을 위해 */
     transform: translateX(-50%); /* 가운데 정렬 완료 */
     max-width: 800px; /* 컨테이너와 동일한 최대 너비 */
@@ -177,4 +178,83 @@
 
 .back-button {
     margin-bottom: 20px;
+}
+
+/* 페이지 전환 애니메이션 스타일 */
+.page-content {
+    width: 100%;
+    position: relative;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+/* 오른쪽에서 들어오는 애니메이션 */
+.slide-in-right {
+    animation: slideInRight 0.3s forwards;
+}
+
+/* 왼쪽으로 나가는 애니메이션 */
+.slide-out-left {
+    animation: slideOutLeft 0.3s forwards;
+}
+
+/* 왼쪽에서 들어오는 애니메이션 */
+.slide-in-left {
+    animation: slideInLeft 0.3s forwards;
+}
+
+/* 오른쪽으로 나가는 애니메이션 */
+.slide-out-right {
+    animation: slideOutRight 0.3s forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* 애니메이션 없이 고정된 페이지 */
+.static-animation {
+    transform: translateX(0);
+    opacity: 1;
+    animation: none;
 }
