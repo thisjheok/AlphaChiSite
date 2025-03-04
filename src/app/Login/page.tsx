@@ -29,7 +29,7 @@ export default function Login() {
             }else{
                 localStorage.setItem('user_id', loginReturn.user_id);
                 console.log('로그인 성공:', data);
-                router.push('/');
+                router.push('/Main');
             }
         }
     };

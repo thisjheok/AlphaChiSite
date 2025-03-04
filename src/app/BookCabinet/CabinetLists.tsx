@@ -18,9 +18,10 @@ interface CabinetListsProps {
     startDate: string;
     endDate: string;
     user_id: number;
+    onSelectCabinet?: (cabinetId: string | null) => void;
 }
 
-export default function CabinetLists({ startDate, endDate, user_id }: CabinetListsProps) {
+export default function CabinetLists({ startDate, endDate, user_id, onSelectCabinet }: CabinetListsProps) {
     const router = useRouter();
 
     const [selectedCabinet, setSelectedCabinet] = useState<string | null>(null);
@@ -75,11 +76,27 @@ export default function CabinetLists({ startDate, endDate, user_id }: CabinetLis
         loadReservations();
     }, []);
 
+    useEffect(() => {
+        if (onSelectCabinet) {
+            onSelectCabinet(selectedCabinet);
+        }
+    }, [selectedCabinet, onSelectCabinet]);
+
     const CabinetElement = ({ cabinet }: { cabinet: string }) => {
+        const handleCabinetClick = () => {
+            if (!reservations[cabinet]) {
+                if (selectedCabinet === cabinet) {
+                    setSelectedCabinet(null);
+                } else {
+                    setSelectedCabinet(cabinet);
+                }
+            }
+        };
+        
         return (
             <div 
                 className={`cabinet-element ${reservations[cabinet] ? 'reserved' : ''} ${selectedCabinet === cabinet ? 'selected' : ''}`}
-                onClick={() => !reservations[cabinet] && setSelectedCabinet(cabinet)}
+                onClick={handleCabinetClick}
             >
                 {cabinet}
             </div>
@@ -112,7 +129,7 @@ export default function CabinetLists({ startDate, endDate, user_id }: CabinetLis
             console.log(data)
             if(data[0].reservation_id === null || data[0].reservation_id === undefined){
                 alert('이미 예약한 사물함을 지니고 있습니다.');
-                router.push('/');
+                router.push('/Main');
             }
             else{
                 router.push('/BookCabinet/Complete');
@@ -125,23 +142,15 @@ export default function CabinetLists({ startDate, endDate, user_id }: CabinetLis
     }
 
     return (
-        <>
-        <h2 className="BookCabinetTitle">예약할 캐비넷을 선택해주세요</h2>
-        <div className="cabinet-list">
-            {cabinets.flat().map((cabinet) => (
-                <CabinetElement key={cabinet} cabinet={cabinet} />
-            ))}
+        <div className="cabinet-lists-container">
+            <h2 className="BookCabinetTitle">예약할 캐비넷을 선택해주세요</h2>
+            <div className="cabinet-list">
+                {cabinets.flat().map((cabinet) => (
+                    <CabinetElement key={cabinet} cabinet={cabinet} />
+                ))}
+            </div>
         </div>
-        <div className="BookCabinetButtonContainer">
-            <button 
-                className="BookCabinetButton" 
-                onClick={() => {
-                    handleMakeReservation(user_id);
-                }}
-            >
-                예약하기
-            </button>
-        </div>
-        </>
     );
-}   
+}
+
+export { CabinetLists };   

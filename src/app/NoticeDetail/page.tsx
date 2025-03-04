@@ -36,7 +36,7 @@ export default function Notice() {
     return (
         <div className='NoticeDetailContainer'>
             <div className='NoticeDetailHeader'>
-                <img src='/img/icons/back-button.svg' alt='back' className='NoticeDetailBackButton' onClick={() => router.push('/')}/>
+                <img src='/img/icons/back-button.svg' alt='back' className='NoticeDetailBackButton' onClick={() => router.push('/Main')}/>
                 <h1 className='NoticeDetailTitle'>공지사항</h1>
             </div>
             {notice.length > 0 && (
