@@ -112,7 +112,7 @@ export default function CabinetLists({ startDate, endDate, user_id }: CabinetLis
             console.log(data)
             if(data[0].reservation_id === null || data[0].reservation_id === undefined){
                 alert('이미 예약한 사물함을 지니고 있습니다.');
-                router.push('/');
+                router.push('/Main');
             }
             else{
                 router.push('/BookCabinet/Complete');

@@ -83,7 +83,7 @@ export default function Mypage() {
     return (
         <div className='MypageContainer'>
             <div className='MypageHeader'>
-                <img src='/img/icons/back-button.svg' alt='back' className='MypageBackButton' onClick={() => router.push('/')}/>
+                <img src='/img/icons/back-button.svg' alt='back' className='MypageBackButton' onClick={() => router.push('/Main')}/>
                 <h1 className='MypageTitle'>마이페이지</h1>
             </div>
             <div className='MypageBox'>

@@ -53,7 +53,7 @@ export default function BookCabinet() {
 
     const handleBackPage = () => {
         if (currentPage === 1){
-            router.push('/');
+            router.push('/Main');
         };
         setCurrentPage(currentPage - 1);
     }
