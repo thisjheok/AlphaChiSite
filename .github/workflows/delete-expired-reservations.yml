@@ -1,0 +1,28 @@
+name: Delete Expired Reservations
+
+on:
+  schedule:
+    # 매일 오전 6시에 실행 (UTC 기준 21:00, 한국 시간으로 오전 6:00)
+    - cron: '0 21 * * *'
+  workflow_dispatch: # 수동 실행 옵션 추가
+
+jobs:
+  delete-expired:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm install @supabase/supabase-js
+        
+      - name: Run delete expired reservations
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_KEY }}
+        run: node .github/scripts/delete-expired.js 
