@@ -27,7 +27,8 @@ const Notice = () => {
                 console.error('공지사항 가져오기 오류:', error);
             } else {
                 console.log('공지사항 가져오기 성공:', data);
-                setNotice(data);
+                const sortedData = [...data].sort((a, b) => b.id - a.id);
+                setNotice(sortedData);
             }
         }
         fetchNotice();
