@@ -28,7 +28,8 @@ export default function Notice() {
                 console.error('공지사항 가져오기 오류:', error);
             } else {
                 console.log('공지사항 가져오기 성공:', data);
-                setNotice(data);
+                const sortedData = [...data].sort((a, b) => b.id - a.id);
+                setNotice(sortedData);
             }
         }
         fetchNotice();
@@ -57,6 +58,3 @@ export default function Notice() {
         </div>
     );
 }
-//TODO:
-//공지 세부사항 Dynamic Route 추가 필요
-// 게시글 세부 페이지 만들기 
